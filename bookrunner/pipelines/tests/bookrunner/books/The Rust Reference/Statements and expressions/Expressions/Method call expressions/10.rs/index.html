@@ -1,0 +1,2405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    Pipeline tests/bookrunner/books/The Rust Reference/Statements and expressions/Expressions/Method call expressions/10.rs
+  </title>
+<style>
+#title{
+  background-color: #ec407a;
+  color: white;
+  padding: 2em;
+}
+h1 {
+  margin-bottom: 0em;
+}
+#subtitle {
+  font-variant: small-caps;
+  text-transform: lowercase;
+  letter-spacing: 0.2em;
+}
+.run-info ul {
+  list-style: none;
+}
+.run-info ul li {
+  display: inline;
+  margin-right: 6em;
+  margin-left: -3em;
+  text-transform: uppercase;
+  font-size: small;
+  color: #ec407a;
+}
+#content {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 2em;
+  color: #263238;
+  font-family: Helvetica, sans-serif;
+}
+p {
+  margin: 0;
+}
+.command-table {
+  background-color: #eceff1;
+  padding: 0.3em;
+  border-radius: 0.3em;
+  margin-bottom: 4em;
+}
+.command-table .fail-ignored {
+  background-color: #e65100cc;
+  padding: 0.3em;
+  border-radius: 0.3em;
+}
+.command-table .success {
+  background-color: #1a237ecc;
+  padding: 0.3em;
+  border-radius: 0.3em;
+}
+.command-table .in-progress {
+  background-color: black;
+  padding: 0.3em;
+  border-radius: 0.3em;
+}
+.command-table .non-started {
+  background-color: #26323844;
+  padding: 0.3em;
+  border-radius: 0.3em;
+}
+.command-table .fail {
+  background-color: #f44336cc;
+  padding: 0.3em;
+  border-radius: 0.3em;
+}
+.command-content {
+  background-color: #eceff1;
+  padding: 1em;
+}
+.command-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.command-id-link{
+  flex-grow: 0;
+}
+.command-id-link a {
+  font-size: xx-large;
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 1px  1px 0px #000000bb,
+              -1px -1px 0px #ffffffbb;
+  text-decoration: none;
+  margin-left: 0.2em;
+}
+.command-id-link a:link {
+  text-shadow: 1px  1px 0px #000000bb,
+              -1px -1px 0px #ffffffbb;
+}
+.command-id-link a:visited {
+  text-shadow: 1px  1px 0px #000000bb,
+              -1px -1px 0px #ffffffbb;
+}
+.command-id-link a:visited:hover {
+  color: #ec407a;
+  background-color: #00000000;
+  text-shadow: 1px  1px 0px #000000bb,
+              -1px -1px 0px #ffffffbb,
+               0px 0px 10px #fff,
+               0px 0px 5px #ec407a,
+               0px 0px 5px #ec407a;
+}
+.command-id-link a:hover {
+  color: #ec407a;
+  background-color: #00000000;
+  text-shadow: 1px  1px 0px #000000bb,
+              -1px -1px 0px #ffffffbb
+               0px 0px 10px #fff,
+               0px 0px 5px #ec407a,
+               0px 0px 5px #ec407a;
+}
+.command-id-link a:active {
+  color: #ffeb3b;
+  background-color: #00000000;
+  text-shadow: 1px  1px 0px #000000bb,
+              -1px -1px 0px #ffffffbb,
+                 0px 0px 10px #fff,
+                 0px 0px 5px #ffeb3b,
+                 0px 0px 5px #ffeb3b;
+}
+.command-id-link a:visited:active {
+  color: #ffeb3b;
+  background-color: #00000000;
+  text-shadow: 1px  1px 0px #000000bb,
+              -1px -1px 0px #ffffffbb,
+                 0px 0px 10px #fff,
+                 0px 0px 5px #ffeb3b,
+                 0px 0px 5px #ffeb3b;
+}
+.command-description {
+  color: #26323899;
+  font-size: smaller;
+  text-align: center;
+  font-weight: bold;
+  flex-grow: 1;
+}
+
+.command-invocation {
+  padding: 1em;
+  color: #fff;
+  background-color: #005662;
+  font-size: small;
+  font-family: monospace;
+  border-radius: 0.5em;
+  text-shadow: 0 0 2px #ffccbccc;
+}
+.command-stats-table {
+  margin-top: 0.2em;
+  border-radius: 0.5em;
+  padding: 0.2em;
+  padding-top: 0.4em;
+  display: flex;
+  flex-direction: column;
+  background-color: #eae3998a;
+  color: #263238cc;
+  margin-bottom: 0.2em;
+}
+.command-stats-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
+  font-size: small;
+  text-transform: uppercase;
+}
+.command-stats-row p .value {
+  color: #00251aaa;
+  text-shadow: 0 0 2px #82ada944;
+  font-weight: bold;
+}
+.literal-stdout {
+  margin-top: 0.4em;
+  margin-bottom: 0.2em;
+  padding: 1em;
+  border-radius: 0.5em;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+.output-box {
+  margin-top: 0.4em;
+  margin-bottom: 0.2em;
+  padding: 1em;
+  color: #000a12;
+  background-color: #cfd8dc;
+  font-size: small;
+  font-family: monospace;
+  border-radius: 0.5em;
+  max-height: 20em;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+.output-box xmp{
+  white-space: pre;
+}
+.stage-name p {
+  margin-left: 0.5em;
+  color: #546e7a;
+  text-shadow:  -1px  0px 0px #fff
+               ,-2px  0px 0px #ffffff99
+               ,-1px  1px 0px #ffffff99
+               ;
+  font-size: 48pt;
+  font-variant: small-caps;
+  text-transform: lowercase;
+  font-weight: bold;
+  font-style: italic;
+}
+.stage-name .underline {
+  width: 100%;
+  height: 1.1em;
+  background-color: #546e7a;
+  margin-top: -1.6em;
+}
+.stage-name {
+  margin-top: 6em;
+  margin-bottom: 3em;
+}
+
+.outcome-table-info-box {
+  margin-top: 0.4em;
+  margin-bottom: 0.2em;
+  padding: 1em;
+  color: #000a12;
+  background-color: #ffee58;
+  border-radius: 0.5em;
+}
+.outcome-table-info-box .outcome{
+  font-weight: bold;
+}
+#toc {
+  margin-bottom: 6em;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 1;
+  margin-right: 3em;
+}
+.toc-title {
+  text-align: center;
+  font-variant: small-caps;
+  text-transform: lowercase;
+  margin-bottom: -1em;
+}
+.toc-section{
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  text-transform: capitalize;
+}
+.toc-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.toc-row-icon {
+  padding-right: 8px;
+}
+.status-icon-cross {
+  fill: #f44336;
+    width: 16px;
+    height: 16px;
+}
+.status-icon-tick {
+  fill: #3f51b5;
+  stroke: #ffffff77;
+  stroke-width: 1px;
+  width: 16px;
+  height: 16px;
+}
+
+.status-icon-in-progress {
+  fill: #333;
+  width: 16px;
+  height: 16px;
+}
+
+.status-icon-in-progress circle {
+  stroke: #333;
+  stroke-width: 2px;
+  fill: none
+}
+a:link {
+  color: #1e88e5;
+}
+a:visited {
+  color: #1e88e5;
+}
+a:visited:hover {
+  background-color: #1e88e5;
+  color: #fff;
+  text-decoration: none;
+}
+a:hover {
+  background-color: #1e88e5;
+  color: #fff;
+  text-decoration: none;
+}
+a:active {
+  background-color: #ec407a;
+  color: #fff;
+  text-decoration: none;
+}
+a:visited:active {
+  background-color: #ec407a;
+  color: #fff;
+  text-decoration: none;
+}
+
+#contents-container {
+  margin-top: 6em;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+#depgraph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: flex-start;
+  flex-shrink: 7;
+}
+
+#depgraph-title p {
+  text-align: center;
+  font-variant: small-caps;
+  text-transform: lowercase;
+}
+
+#depgraph-preview img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#depgraph-preview {
+  padding: 1em;
+}
+
+.memory-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em;
+  align-items: center;
+}
+.memory-preview {
+  width: 75%;
+}
+.memory-preview svg {
+  margin-left: -1em;
+  margin-right: -2em;
+}
+.memory-table {
+}
+.memory-title {
+  text-align: center;
+  font-style: bold;
+}
+.memory-subtitle {
+  text-transform: lowercase;
+  font-variant: small-caps;
+  text-align: center;
+  opacity: 0.8;
+}
+.memory-pad {
+  width: 1.5em;
+}
+.memory-value {
+  text-align: center;
+  margin-right: 2em;
+}
+.rss {
+  color: #ab47bc;
+}
+.vsz {
+  color: #4caf50;
+}
+
+
+@media (prefers-color-scheme: dark){
+  a:link {
+    color: #29b6f6;
+  }
+  a:visited {
+    color: #29b6f6;
+  }
+  a:visited:hover {
+    color: #263238;
+    background-color: #29b6f6;
+  }
+  a:hover {
+    color: #263238;
+    background-color: #29b6f6;
+  }
+  a:active {
+    color: #263238;
+    background-color: #ec407a;
+  }
+  a:visited:active {
+    color: #263238;
+    background-color: #ec407a;
+  }
+  .command-id-link a:link {
+    text-shadow: 1px  1px 0px #000000bb,
+                -1px -1px 0px #ffffffbb;
+  }
+  .command-id-link a:visited {
+    text-shadow: 1px  1px 0px #000000bb,
+                -1px -1px 0px #ffffffbb;
+  }
+  .command-id-link a:visited:hover {
+    color: #ec407a;
+    background-color: #00000000;
+    text-shadow: 1px  1px 0px #000000bb,
+                -1px -1px 0px #ffffffbb.
+                 0px 0px 10px #fff,
+                 0px 0px 5px #ec407a,
+                 0px 0px 5px #ec407a;
+  }
+  .command-id-link a:hover {
+    color: #ec407a;
+    background-color: #00000000;
+    text-shadow: 1px  1px 0px #000000bb,
+                -1px -1px 0px #ffffffbb,
+                 0px 0px 10px #fff,
+                 0px 0px 5px #ec407a,
+                 0px 0px 5px #ec407a;
+  }
+  .command-id-link a:active {
+    color: #ffeb3b;
+    background-color: #00000000;
+    text-shadow: 1px  1px 0px #000000bb,
+                -1px -1px 0px #ffffffbb,
+                 0px 0px 10px #fff,
+                 0px 0px 5px #ffeb3b,
+                 0px 0px 5px #ffeb3b;
+  }
+  .command-id-link a:visited:active {
+    color: #ffeb3b;
+    background-color: #00000000;
+    text-shadow: 1px  1px 0px #000000bb,
+                -1px -1px 0px #ffffffbb,
+                 0px 0px 10px #fff,
+                 0px 0px 5px #ffeb3b,
+                 0px 0px 5px #ffeb3b;
+  }
+  body {
+    color: #babdbe;
+    background-color: #263238;
+  }
+  .outcome-table-info-box p{
+    color: #000a12;
+  }
+  p {
+    color: #babdbe;
+  }
+  #subtitle {
+    color: #fff;
+  }
+  .command-table {
+    background-color: #37474f;
+  }
+  .command-content {
+    background-color: #37474f;
+  }
+  .command-invocation p {
+    color: #fff;
+  }
+  .command-stats-table {
+    background-color: #eae399d0;
+    color: #263238;
+  }
+  .command-stats-table p {
+    color: #263238;
+  }
+  .output-box {
+    color: #cfd8dccc;
+    background-color: #102027;
+  }
+  .stage-name p {
+    text-shadow: -1px  0px 0px #263238,
+                 -2px  0px 0px #26323899,
+                 -1px  1px 0px #26323899;
+  }
+  .status-icon-in-progress { fill: #ddd; }
+  .status-icon-in-progress circle { stroke: #ddd; }
+
+  /* SVG graphs */
+  g text {
+    fill: #eceff1;
+    stroke: #fff0;
+  }
+}
+</style>
+</head>
+<body>
+<div id="content">
+
+  <div id="title">
+    <h1>
+      Book Runner pipeline &lsquo;tests/bookrunner/books/The Rust Reference/Statements and expressions/Expressions/Method call expressions/10.rs&rsquo;
+    </h1>
+    <p id="subtitle">
+      Litani CI Dashboard
+    </p>
+  </div><!-- id="title" -->
+
+  <div class=run-info>
+    <ul>
+      <li>Pipeline status: fail</li>
+      <li>2022-06-28T17:18:50Z</li>
+      <li>8c150595-9290-4fd6-bf99-9894dbe0c928</li>
+    </ul>
+  </div><!-- class=run-info -->
+
+  <div id="contents-container">
+
+    <div id="toc">
+      <div class="toc-title">
+        <p>Summary of jobs for this pipeline</p>
+      </div><!-- class="toc-title" -->
+
+      
+        <div class="toc-section">
+          <p>check</p>
+        </div><!-- class="toc-section" -->
+        
+          <div class="toc-row">
+
+            <div class="toc-row-icon">
+              
+                <svg height="16px" width="16px" class="status-icon-tick">
+                  <polygon points="1,11 6,15 15,3 13,1 6,12 3,8"></polygon>
+                </svg>
+              
+            </div><!-- class="toc-row-icon" -->
+
+            <div class="toc-row-job-name">
+              <p>
+              <a href="#job-68cac174-a7d5-471e-b349-4c2131418391">
+              
+              Is this valid Rust code?
+              
+              </a>
+              </p>
+            </div><!-- class="toc-row-job-name" -->
+
+          </div><!-- class="toc-row" -->
+
+        
+      
+        <div class="toc-section">
+          <p>codegen</p>
+        </div><!-- class="toc-section" -->
+        
+          <div class="toc-row">
+
+            <div class="toc-row-icon">
+              
+                <svg height="16px" width="16px" class="status-icon-tick">
+                  <polygon points="1,11 6,15 15,3 13,1 6,12 3,8"></polygon>
+                </svg>
+              
+            </div><!-- class="toc-row-icon" -->
+
+            <div class="toc-row-job-name">
+              <p>
+              <a href="#job-958412df-27d1-43d8-aae7-d0c69b10adab">
+              
+              Does Kani support all the Rust features used in it?
+              
+              </a>
+              </p>
+            </div><!-- class="toc-row-job-name" -->
+
+          </div><!-- class="toc-row" -->
+
+        
+      
+        <div class="toc-section">
+          <p>verification</p>
+        </div><!-- class="toc-section" -->
+        
+          <div class="toc-row">
+
+            <div class="toc-row-icon">
+              
+                <svg height="16px" width="16px" class="status-icon-cross">
+                  <polygon points="
+                      1,3 7,8 1,13 3,15 8,9 13,15 15,13 9,8 15,3 13,1 8,7 3,1">
+                  </polygon>
+                </svg>
+              
+            </div><!-- class="toc-row-icon" -->
+
+            <div class="toc-row-job-name">
+              <p>
+              <a href="#job-9b706b35-b48a-498b-8558-1793a70fb286">
+              
+              Ca Kani reason about it?
+              
+              </a>
+              </p>
+            </div><!-- class="toc-row-job-name" -->
+
+          </div><!-- class="toc-row" -->
+
+        
+      
+    </div><!-- id="toc" -->
+
+
+    
+
+  </div><!-- id="contents-container" -->
+
+
+  
+  <div class="stage">
+    <div class="stage-name">
+      <p>check</p>
+      <div class="underline"></div>
+    </div><!-- class="stage-name" -->
+
+    
+    <div class="command-table" id="job-68cac174-a7d5-471e-b349-4c2131418391">
+      
+      <div class="success">
+      
+        <div class="command-content">
+          <div class="command-header">
+            <div class="command-id-link">
+              <p>
+                <a href="#job-68cac174-a7d5-471e-b349-4c2131418391">#</a>
+              </p>
+            </div><!-- class="command-id-link" -->
+            <div class="command-description">
+              
+              <p>
+                Is this valid Rust code?
+              </p>
+              
+            </div><!-- class="command-description" -->
+          </div><!-- class="command-header" -->
+          <div class="command-invocation">
+            <p>
+            "kani-compiler" "--edition" "2021" "-Z" "no-codegen" "tests/bookrunner/books/The Rust Reference/Statements and expressions/Expressions/Method call expressions/10.rs"
+            </p>
+          </div><!-- class="command-invocation" -->
+
+          
+          <div class="command-stats-table">
+            
+            <div class="command-stats-row">
+              <p>Command return code:
+              <span class="value">
+                0
+              </span></p>
+              <p>OK returns:
+              <span class="value">
+                ['0']
+              </span></p>
+              <p>Ignored returns:
+              <span class="value">
+                None
+              </span></p>
+            </div><!-- class="command-stats-row" -->
+            <div class="command-stats-row">
+              <p>Timeout:
+              <span class="value">
+                5
+              </span></p>
+              <p>Timeout ok:
+              <span class="value">
+                False
+              </span></p>
+              <p>Timeout ignored:
+              <span class="value">
+                False
+              </span></p>
+              <p>Timeout reached:
+              <span class="value">
+                False
+              </span></p>
+            </div><!-- class="command-stats-row" -->
+            <div class="command-stats-row">
+              <p>Start time:
+              <span class="value">
+                2022-06-28T17:23:32Z
+              </span></p>
+              <p>Duration:
+              <span class="value">
+                00s
+              </span></p>
+              <p>End time:
+              <span class="value">
+                2022-06-28T17:23:32Z
+              </span></p>
+            </div><!-- class="command-stats-row" -->
+            <div class="command-stats-row">
+              <p>Command successful:
+              <span class="value">
+              
+              yes
+              
+              </span></p>
+            </div><!-- class="command-stats-row" -->
+             
+          </div><!-- class="command-stats-table" -->
+          
+
+          
+
+
+          
+
+
+          
+
+          
+
+        </div><!-- class="command-content" -->
+      </div><!-- class="fail" -->
+    </div><!-- id="command-table" -->
+    
+
+  </div><!-- class="stage" -->
+  
+  <div class="stage">
+    <div class="stage-name">
+      <p>codegen</p>
+      <div class="underline"></div>
+    </div><!-- class="stage-name" -->
+
+    
+    <div class="command-table" id="job-958412df-27d1-43d8-aae7-d0c69b10adab">
+      
+      <div class="success">
+      
+        <div class="command-content">
+          <div class="command-header">
+            <div class="command-id-link">
+              <p>
+                <a href="#job-958412df-27d1-43d8-aae7-d0c69b10adab">#</a>
+              </p>
+            </div><!-- class="command-id-link" -->
+            <div class="command-description">
+              
+              <p>
+                Does Kani support all the Rust features used in it?
+              </p>
+              
+            </div><!-- class="command-description" -->
+          </div><!-- class="command-header" -->
+          <div class="command-invocation">
+            <p>
+            "kani-compiler" "--edition" "2021" "--out-dir" "build/tmp" "tests/bookrunner/books/The Rust Reference/Statements and expressions/Expressions/Method call expressions/10.rs"
+            </p>
+          </div><!-- class="command-invocation" -->
+
+          
+          <div class="command-stats-table">
+            
+            <div class="command-stats-row">
+              <p>Command return code:
+              <span class="value">
+                0
+              </span></p>
+              <p>OK returns:
+              <span class="value">
+                ['0']
+              </span></p>
+              <p>Ignored returns:
+              <span class="value">
+                None
+              </span></p>
+            </div><!-- class="command-stats-row" -->
+            <div class="command-stats-row">
+              <p>Timeout:
+              <span class="value">
+                10
+              </span></p>
+              <p>Timeout ok:
+              <span class="value">
+                False
+              </span></p>
+              <p>Timeout ignored:
+              <span class="value">
+                False
+              </span></p>
+              <p>Timeout reached:
+              <span class="value">
+                False
+              </span></p>
+            </div><!-- class="command-stats-row" -->
+            <div class="command-stats-row">
+              <p>Start time:
+              <span class="value">
+                2022-06-28T17:26:51Z
+              </span></p>
+              <p>Duration:
+              <span class="value">
+                01s
+              </span></p>
+              <p>End time:
+              <span class="value">
+                2022-06-28T17:26:52Z
+              </span></p>
+            </div><!-- class="command-stats-row" -->
+            <div class="command-stats-row">
+              <p>Command successful:
+              <span class="value">
+              
+              yes
+              
+              </span></p>
+            </div><!-- class="command-stats-row" -->
+             
+          </div><!-- class="command-stats-table" -->
+          
+
+          
+
+
+          
+
+
+          
+
+          
+
+        </div><!-- class="command-content" -->
+      </div><!-- class="fail" -->
+    </div><!-- id="command-table" -->
+    
+
+  </div><!-- class="stage" -->
+  
+  <div class="stage">
+    <div class="stage-name">
+      <p>verification</p>
+      <div class="underline"></div>
+    </div><!-- class="stage-name" -->
+
+    
+    <div class="command-table" id="job-9b706b35-b48a-498b-8558-1793a70fb286">
+      
+      <div class="fail">
+      
+        <div class="command-content">
+          <div class="command-header">
+            <div class="command-id-link">
+              <p>
+                <a href="#job-9b706b35-b48a-498b-8558-1793a70fb286">#</a>
+              </p>
+            </div><!-- class="command-id-link" -->
+            <div class="command-description">
+              
+              <p>
+                Ca Kani reason about it?
+              </p>
+              
+            </div><!-- class="command-description" -->
+          </div><!-- class="command-header" -->
+          <div class="command-invocation">
+            <p>
+            RUSTFLAGS="--edition 2021" "kani" "tests/bookrunner/books/The Rust Reference/Statements and expressions/Expressions/Method call expressions/10.rs" "--enable-unstable" "--function" "main" "--enable-unstable" "--cbmc-args" "--unwind" "0"
+            </p>
+          </div><!-- class="command-invocation" -->
+
+          
+          <div class="command-stats-table">
+            
+            <div class="command-stats-row">
+              <p>Command return code:
+              <span class="value">
+                1
+              </span></p>
+              <p>OK returns:
+              <span class="value">
+                ['0']
+              </span></p>
+              <p>Ignored returns:
+              <span class="value">
+                None
+              </span></p>
+            </div><!-- class="command-stats-row" -->
+            <div class="command-stats-row">
+              <p>Timeout:
+              <span class="value">
+                60
+              </span></p>
+              <p>Timeout ok:
+              <span class="value">
+                False
+              </span></p>
+              <p>Timeout ignored:
+              <span class="value">
+                False
+              </span></p>
+              <p>Timeout reached:
+              <span class="value">
+                False
+              </span></p>
+            </div><!-- class="command-stats-row" -->
+            <div class="command-stats-row">
+              <p>Start time:
+              <span class="value">
+                2022-06-28T17:29:52Z
+              </span></p>
+              <p>Duration:
+              <span class="value">
+                03s
+              </span></p>
+              <p>End time:
+              <span class="value">
+                2022-06-28T17:29:55Z
+              </span></p>
+            </div><!-- class="command-stats-row" -->
+            <div class="command-stats-row">
+              <p>Command successful:
+              <span class="value">
+              
+              no
+              
+              </span></p>
+            </div><!-- class="command-stats-row" -->
+             
+          </div><!-- class="command-stats-table" -->
+          
+
+          
+
+
+          
+
+
+          
+            
+            <div class="output-box"><xmp>stdout:
+              
+Checking harness main...
+CBMC 5.60.0 (cbmc-5.60.0)
+CBMC version 5.60.0 (cbmc-5.60.0) 64-bit x86_64 linux
+Reading GOTO program from file tests/bookrunner/books/The Rust Reference/Statements and expressions/Expressions/Method call expressions/10.out.for-main
+Generating GOTO Program
+Adding CPROVER library (x86_64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+aborting path on assume(false) at  thread 0
+aborting path on assume(false) at file /home/runner/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/mod.rs line 241 column 21 function core::num::dec2flt::dec2flt thread 0
+Runtime Symex: 0.0243777s
+size of program expression: 432 steps
+slicing removed 287 assignments
+Generated 9 VCC(s), 3 remaining after simplification
+Runtime Postprocess Equation: 0.000115s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.000832301s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 7e-06s
+Solving with MiniSAT 2.2.1 with simplifier
+906 variables, 906 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 0.000467601s
+Runtime decision procedure: 0.0013623s
+
+RESULTS:
+Check 1: main.assertion.1
+- Status: UNREACHABLE
+- Description: "assertion failed: 1.14 < log_pi && log_pi < 1.15"
+- Location: tests/bookrunner/books/The Rust Reference/Statements and expressions/Expressions/Method call expressions/10.rs:7:1 in function main
+
+Check 2: std::iter::Iterator::zip.unsupported_construct.1
+- Status: SUCCESS
+- Description: "resume instruction"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/iterator.rs:569:5 in function std::iter::Iterator::zip
+
+Check 3: _ZN4core3num7dec2flt5parse12parse_number17h3762f8783ce09378E.1
+- Status: FAILURE
+- Description: "assertion"
+- Location: Unknown File in function _ZN4core3num7dec2flt5parse12parse_number17h3762f8783ce09378E
+
+Check 4: std::cmp::min_by.unreachable.1
+- Status: SUCCESS
+- Description: "unreachable code"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1216:11 in function std::cmp::min_by
+
+Check 5: std::cmp::min_by.unsupported_construct.1
+- Status: SUCCESS
+- Description: "resume instruction"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1215:1 in function std::cmp::min_by
+
+Check 6: core::num::dec2flt::dec2flt.unreachable.1
+- Status: SUCCESS
+- Description: "unreachable code"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/mod.rs:241:21 in function core::num::dec2flt::dec2flt
+
+Check 7: _ZN59_$LT$f32$u20$as$u20$core..num..dec2flt..float..RawFloat$GT$15pow10_fast_path17hb4df8563915ce8bdE.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN59_$LT$f32$u20$as$u20$core..num..dec2flt..float..RawFloat$GT$15pow10_fast_path17hb4df8563915ce8bdE
+
+Check 8: _ZN59_$LT$f32$u20$as$u20$core..num..dec2flt..float..RawFloat$GT$8from_u6417hd9753663bd8aea3dE.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN59_$LT$f32$u20$as$u20$core..num..dec2flt..float..RawFloat$GT$8from_u6417hd9753663bd8aea3dE
+
+Check 9: _ZN4core3num7dec2flt6lemire22compute_product_approx17h0409afed4b198845E.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN4core3num7dec2flt6lemire22compute_product_approx17h0409afed4b198845E
+
+Check 10: std::result::Result::<T, E>::unwrap_or.unreachable.1
+- Status: SUCCESS
+- Description: "unreachable code"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/result.rs:1458:15 in function std::result::Result::<T, E>::unwrap_or
+
+Check 11: <std::option::Option<T> as std::ops::Try>::branch.unreachable.1
+- Status: SUCCESS
+- Description: "unreachable code"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/option.rs:2291:15 in function <std::option::Option<T> as std::ops::Try>::branch
+
+Check 12: _ZN4core3num7dec2flt7decimal7Decimal5round17hd5ca20e08d2a0e0aE.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN4core3num7dec2flt7decimal7Decimal5round17hd5ca20e08d2a0e0aE
+
+Check 13: std::f32::<impl f32>::ln.unsupported_construct.1
+- Status: SUCCESS
+- Description: "'logf32' intrinsic is not currently supported by Kani. Please post your example at https://github.com/model-checking/kani/issues/new/choose"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/f32.rs:427:18 in function std::f32::<impl f32>::ln
+
+Check 14: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.unsupported_construct.1
+- Status: SUCCESS
+- Description: "resume instruction"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:269:5 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 15: _ZN59_$LT$f32$u20$as$u20$core..num..dec2flt..float..RawFloat$GT$13from_u64_bits17h47b355e51f7e2eccE.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN59_$LT$f32$u20$as$u20$core..num..dec2flt..float..RawFloat$GT$13from_u64_bits17h47b355e51f7e2eccE
+
+Check 16: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.arithmetic_overflow.1
+- Status: SUCCESS
+- Description: "attempt to compute unchecked_sub which would overflow"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:29:33 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 17: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.exact_div.1
+- Status: SUCCESS
+- Description: "exact_div arguments divide exactly"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:35:22 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 18: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.exact_div.2
+- Status: SUCCESS
+- Description: "exact_div divisor is nonzero"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:35:22 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 19: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.exact_div.3
+- Status: SUCCESS
+- Description: "exact_div division does not overflow"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:35:22 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 20: _ZN4core3num7dec2flt6lemire5power17h7e9f6d00be2200c0E.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN4core3num7dec2flt6lemire5power17h7e9f6d00be2200c0E
+
+Check 21: _ZN4core3num7dec2flt6common8BiasedFp9zero_pow217h73125e8964d90d4eE.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN4core3num7dec2flt6common8BiasedFp9zero_pow217h73125e8964d90d4eE
+
+Check 22: std::slice::Iter::<'a, T>::new.assume.1
+- Status: SUCCESS
+- Description: "assumption failed"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter.rs:92:13 in function std::slice::Iter::<'a, T>::new
+
+Check 23: std::ptr::const_ptr::<impl *const T>::offset.arithmetic_overflow.1
+- Status: SUCCESS
+- Description: "offset: attempt to compute number in bytes which would overflow"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/const_ptr.rs:457:18 in function std::ptr::const_ptr::<impl *const T>::offset
+
+Check 24: std::ptr::const_ptr::<impl *const T>::offset.arithmetic_overflow.2
+- Status: SUCCESS
+- Description: "attempt to compute offset which would overflow"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/const_ptr.rs:457:18 in function std::ptr::const_ptr::<impl *const T>::offset
+
+Check 25: _ZN4core3num7dec2flt7decimal7Decimal10left_shift17h9fa207c373b3342fE.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN4core3num7dec2flt7decimal7Decimal10left_shift17h9fa207c373b3342fE
+
+Check 26: _ZN4core3num7dec2flt7decimal7Decimal11right_shift17hca148d32be5762a8E.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN4core3num7dec2flt7decimal7Decimal11right_shift17hca148d32be5762a8E
+
+Check 27: _ZN4core3num7dec2flt5parse21parse_partial_inf_nan14parse_inf_rest17hdd1c54cffc31e5efE.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN4core3num7dec2flt5parse21parse_partial_inf_nan14parse_inf_rest17hdd1c54cffc31e5efE
+
+Check 28: std::ptr::const_ptr::<impl *const T>::wrapping_offset.arithmetic_overflow.1
+- Status: SUCCESS
+- Description: "arith_offset: attempt to compute number in bytes which would overflow"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/const_ptr.rs:539:18 in function std::ptr::const_ptr::<impl *const T>::wrapping_offset
+
+Check 29: std::ptr::const_ptr::<impl *const T>::wrapping_offset.arithmetic_overflow.2
+- Status: SUCCESS
+- Description: "attempt to compute offset which would overflow"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/const_ptr.rs:539:18 in function std::ptr::const_ptr::<impl *const T>::wrapping_offset
+
+Check 30: core::num::dec2flt::slow::parse_long_mantissa::{closure#0}.assertion.1
+- Status: UNREACHABLE
+- Description: "index out of bounds: the length is less than or equal to the given index"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/slow.rs:33:29 in function core::num::dec2flt::slow::parse_long_mantissa::{closure#0}
+
+Check 31: core::num::dec2flt::number::Number::try_fast_path.assertion.1
+- Status: UNREACHABLE
+- Description: "index out of bounds: the length is less than or equal to the given index"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:72:58 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 32: core::num::dec2flt::number::Number::try_fast_path.unreachable.1
+- Status: SUCCESS
+- Description: "unreachable code"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:72:32 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 33: _ZN4core3num7dec2flt9pfe_empty17hfb67d66f2cd72ae3E.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN4core3num7dec2flt9pfe_empty17hfb67d66f2cd72ae3E
+
+Check 34: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::new.unsupported_construct.1
+- Status: SUCCESS
+- Description: "resume instruction"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:262:5 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::new
+
+Check 35: _ZN4core3num7dec2flt11pfe_invalid17hbfd819fb434ed228E.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN4core3num7dec2flt11pfe_invalid17hbfd819fb434ed228E
+
+Check 36: std::iter::Iterator::fold.unsupported_construct.1
+- Status: SUCCESS
+- Description: "resume instruction"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/iterator.rs:2359:5 in function std::iter::Iterator::fold
+
+Check 37: _ZN4core3num7dec2flt7decimal13parse_decimal17he0a5ae23490a54abE.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN4core3num7dec2flt7decimal13parse_decimal17he0a5ae23490a54abE
+
+Check 38: std::ptr::mut_ptr::<impl *mut T>::offset.arithmetic_overflow.1
+- Status: SUCCESS
+- Description: "offset: attempt to compute number in bytes which would overflow"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/mut_ptr.rs:469:18 in function std::ptr::mut_ptr::<impl *mut T>::offset
+
+Check 39: std::ptr::mut_ptr::<impl *mut T>::offset.arithmetic_overflow.2
+- Status: SUCCESS
+- Description: "attempt to compute offset which would overflow"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ptr/mut_ptr.rs:469:18 in function std::ptr::mut_ptr::<impl *mut T>::offset
+
+Check 40: _ZN4core5slice5index26slice_start_index_len_fail17h3da3adce7d823abfE.1
+- Status: SUCCESS
+- Description: "assertion"
+- Location: Unknown File in function _ZN4core5slice5index26slice_start_index_len_fail17h3da3adce7d823abfE
+
+Check 41: core::num::dec2flt::lemire::compute_float.undefined-shift.1
+- Status: SUCCESS
+- Description: "shift distance too large"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/lemire.rs:40:5 in function core::num::dec2flt::lemire::compute_float
+
+Check 42: core::num::dec2flt::lemire::compute_float.undefined-shift.2
+- Status: SUCCESS
+- Description: "shift distance is negative"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/lemire.rs:64:24 in function core::num::dec2flt::lemire::compute_float
+
+Check 43: core::num::dec2flt::lemire::compute_float.undefined-shift.3
+- Status: SUCCESS
+- Description: "shift distance too large"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/lemire.rs:64:24 in function core::num::dec2flt::lemire::compute_float
+
+Check 44: core::num::dec2flt::lemire::compute_float.undefined-shift.4
+- Status: SUCCESS
+- Description: "shift distance is negative"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/lemire.rs:72:9 in function core::num::dec2flt::lemire::compute_float
+
+Check 45: core::num::dec2flt::lemire::compute_float.undefined-shift.5
+- Status: SUCCESS
+- Description: "shift distance too large"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/lemire.rs:72:9 in function core::num::dec2flt::lemire::compute_float
+
+Check 46: core::num::dec2flt::lemire::compute_float.undefined-shift.6
+- Status: SUCCESS
+- Description: "shift distance is negative"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/lemire.rs:93:12 in function core::num::dec2flt::lemire::compute_float
+
+Check 47: core::num::dec2flt::lemire::compute_float.undefined-shift.7
+- Status: SUCCESS
+- Description: "shift distance too large"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/lemire.rs:93:12 in function core::num::dec2flt::lemire::compute_float
+
+Check 48: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.1
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:189:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 49: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.2
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:189:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 50: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.3
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:189:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 51: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.4
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:189:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 52: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.5
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:189:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 53: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.6
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:189:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 54: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.7
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:189:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 55: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.8
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:189:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 56: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.9
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:189:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 57: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.10
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:189:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 58: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.11
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:189:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 59: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.12
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:189:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 60: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.13
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:191:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 61: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.14
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:191:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 62: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.15
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:191:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 63: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.16
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:191:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 64: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.17
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:191:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 65: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.18
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:191:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 66: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.19
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:191:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 67: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.20
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:191:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 68: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.21
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:191:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 69: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.22
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:191:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 70: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.23
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:191:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 71: <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne.pointer_dereference.24
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:191:5 in function <core::num::dec2flt::common::BiasedFp as std::cmp::PartialEq>::ne
+
+Check 72: <f32 as std::ops::Div>::div.division-by-zero.1
+- Status: SUCCESS
+- Description: "division by zero"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/arith.rs:520:45 in function <f32 as std::ops::Div>::div
+
+Check 73: <f32 as std::ops::Div>::div.NaN.1
+- Status: SUCCESS
+- Description: "NaN on division"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/arith.rs:520:45 in function <f32 as std::ops::Div>::div
+
+Check 74: <f32 as std::ops::Div>::div.overflow.1
+- Status: SUCCESS
+- Description: "arithmetic overflow on floating-point division"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/arith.rs:520:45 in function <f32 as std::ops::Div>::div
+
+Check 75: std::iter::Iterator::fold.pointer_dereference.1
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/traits/iterator.rs:2365:19 in function std::iter::Iterator::fold
+
+Check 76: core::num::dec2flt::slow::parse_long_mantissa.pointer_dereference.1
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/slow.rs:62:26 in function core::num::dec2flt::slow::parse_long_mantissa
+
+Check 77: core::num::dec2flt::slow::parse_long_mantissa.pointer_dereference.2
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/slow.rs:62:26 in function core::num::dec2flt::slow::parse_long_mantissa
+
+Check 78: core::num::dec2flt::slow::parse_long_mantissa.pointer_dereference.3
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/slow.rs:62:26 in function core::num::dec2flt::slow::parse_long_mantissa
+
+Check 79: core::num::dec2flt::slow::parse_long_mantissa.pointer_dereference.4
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/slow.rs:62:26 in function core::num::dec2flt::slow::parse_long_mantissa
+
+Check 80: core::num::dec2flt::slow::parse_long_mantissa.pointer_dereference.5
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/slow.rs:62:26 in function core::num::dec2flt::slow::parse_long_mantissa
+
+Check 81: core::num::dec2flt::slow::parse_long_mantissa.pointer_dereference.6
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/slow.rs:62:26 in function core::num::dec2flt::slow::parse_long_mantissa
+
+Check 82: array_bounds.1
+- Status: SUCCESS
+- Description: "index out of bounds: the length is less than or equal to the given index"
+
+Check 83: core::num::dec2flt::slow::parse_long_mantissa.undefined-shift.1
+- Status: SUCCESS
+- Description: "shift distance too large"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/slow.rs:92:20 in function core::num::dec2flt::slow::parse_long_mantissa
+
+Check 84: core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}.pointer_dereference.1
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:42:36 in function core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}
+
+Check 85: core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}.pointer_dereference.2
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:42:36 in function core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}
+
+Check 86: core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}.pointer_dereference.3
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:42:36 in function core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}
+
+Check 87: core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}.pointer_dereference.4
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:42:36 in function core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}
+
+Check 88: core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}.pointer_dereference.5
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:42:36 in function core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}
+
+Check 89: core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}.pointer_dereference.6
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:42:36 in function core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}
+
+Check 90: core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}.pointer_dereference.7
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:42:40 in function core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}
+
+Check 91: core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}.pointer_dereference.8
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:42:40 in function core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}
+
+Check 92: core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}.pointer_dereference.9
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:42:40 in function core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}
+
+Check 93: core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}.pointer_dereference.10
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:42:40 in function core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}
+
+Check 94: core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}.pointer_dereference.11
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:42:40 in function core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}
+
+Check 95: core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}.pointer_dereference.12
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/common.rs:42:40 in function core::num::dec2flt::common::ByteSlice::starts_with_ignore_case::{closure#0}
+
+Check 96: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.1
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:37:38 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 97: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.2
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:37:38 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 98: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.3
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:37:38 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 99: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.4
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:37:38 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 100: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.5
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:37:38 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 101: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.6
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:37:38 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 102: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.7
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:40:17 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 103: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.8
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:40:17 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 104: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.9
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:40:17 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 105: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.10
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:40:17 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 106: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.11
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:40:17 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 107: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.12
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:40:17 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 108: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.13
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:39:16 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 109: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.14
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:39:16 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 110: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.15
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:39:16 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 111: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.16
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:39:16 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 112: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.17
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:39:16 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 113: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.18
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:39:16 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 114: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.19
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:38:16 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 115: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.20
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:38:16 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 116: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.21
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:38:16 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 117: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.22
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:38:16 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 118: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.23
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:38:16 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 119: core::num::dec2flt::number::Number::is_fast_path.pointer_dereference.24
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:38:16 in function core::num::dec2flt::number::Number::is_fast_path
+
+Check 120: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.1
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1413:24 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 121: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.2
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1413:24 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 122: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.3
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1413:24 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 123: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.4
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1413:24 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 124: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.5
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1413:24 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 125: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.6
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1413:24 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 126: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.7
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1413:32 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 127: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.8
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1413:32 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 128: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.9
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1413:32 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 129: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.10
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1413:32 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 130: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.11
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1413:32 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 131: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.12
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1413:32 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 132: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.13
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1414:29 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 133: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.14
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1414:29 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 134: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.15
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1414:29 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 135: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.16
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1414:29 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 136: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.17
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1414:29 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 137: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.18
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1414:29 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 138: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.19
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1414:38 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 139: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.20
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1414:38 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 140: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.21
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1414:38 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 141: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.22
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1414:38 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 142: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.23
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1414:38 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 143: std::cmp::impls::<impl std::cmp::Ord for usize>::cmp.pointer_dereference.24
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/cmp.rs:1414:38 in function std::cmp::impls::<impl std::cmp::Ord for usize>::cmp
+
+Check 144: core::num::dec2flt::dec2flt.pointer_dereference.1
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/mod.rs:228:20 in function core::num::dec2flt::dec2flt
+
+Check 145: core::num::dec2flt::dec2flt.pointer_dereference.2
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/mod.rs:228:26 in function core::num::dec2flt::dec2flt
+
+Check 146: core::num::dec2flt::dec2flt.pointer_dereference.3
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/mod.rs:228:26 in function core::num::dec2flt::dec2flt
+
+Check 147: core::num::dec2flt::dec2flt.pointer_dereference.4
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/mod.rs:228:26 in function core::num::dec2flt::dec2flt
+
+Check 148: core::num::dec2flt::dec2flt.pointer_dereference.5
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/mod.rs:228:26 in function core::num::dec2flt::dec2flt
+
+Check 149: core::num::dec2flt::dec2flt.pointer_dereference.6
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/mod.rs:228:26 in function core::num::dec2flt::dec2flt
+
+Check 150: core::num::dec2flt::dec2flt.pointer_dereference.7
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/mod.rs:228:26 in function core::num::dec2flt::dec2flt
+
+Check 151: core::num::dec2flt::dec2flt.pointer_dereference.8
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/mod.rs:241:21 in function core::num::dec2flt::dec2flt
+
+Check 152: <std::slice::Iter<'a, T> as std::iter::Iterator>::__iterator_get_unchecked.pointer_dereference.1
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:340:42 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::__iterator_get_unchecked
+
+Check 153: <std::slice::Iter<'a, T> as std::iter::Iterator>::__iterator_get_unchecked.pointer_dereference.2
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:340:42 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::__iterator_get_unchecked
+
+Check 154: <std::slice::Iter<'a, T> as std::iter::Iterator>::__iterator_get_unchecked.pointer_dereference.3
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:340:42 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::__iterator_get_unchecked
+
+Check 155: <std::slice::Iter<'a, T> as std::iter::Iterator>::__iterator_get_unchecked.pointer_dereference.4
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:340:42 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::__iterator_get_unchecked
+
+Check 156: <std::slice::Iter<'a, T> as std::iter::Iterator>::__iterator_get_unchecked.pointer_dereference.5
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:340:42 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::__iterator_get_unchecked
+
+Check 157: <std::slice::Iter<'a, T> as std::iter::Iterator>::__iterator_get_unchecked.pointer_dereference.6
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:340:42 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::__iterator_get_unchecked
+
+Check 158: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.1
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:18:21 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 159: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.2
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:18:21 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 160: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.3
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:18:21 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 161: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.4
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:18:21 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 162: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.5
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:18:21 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 163: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.6
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:18:21 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 164: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.7
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:23:13 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 165: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.8
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:23:13 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 166: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.9
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:23:13 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 167: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.10
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:23:13 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 168: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.11
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:23:13 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 169: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.12
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:23:13 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 170: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.13
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:29:47 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 171: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.14
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:29:47 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 172: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.15
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:29:47 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 173: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.16
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:29:47 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 174: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.17
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:29:47 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 175: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.pointer_dereference.18
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:29:47 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 176: <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint.division-by-zero.1
+- Status: SUCCESS
+- Description: "division by zero"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/iter/macros.rs:35:22 in function <std::slice::Iter<'a, T> as std::iter::Iterator>::size_hint
+
+Check 177: division-by-zero.1
+- Status: SUCCESS
+- Description: "division by zero"
+
+Check 178: <f32 as std::ops::Mul>::mul.NaN.1
+- Status: SUCCESS
+- Description: "NaN on multiplication"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/arith.rs:362:45 in function <f32 as std::ops::Mul>::mul
+
+Check 179: <f32 as std::ops::Mul>::mul.overflow.1
+- Status: SUCCESS
+- Description: "arithmetic overflow on floating-point multiplication"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/arith.rs:362:45 in function <f32 as std::ops::Mul>::mul
+
+Check 180: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.1
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:270:12 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 181: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.2
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:270:12 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 182: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.3
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:270:12 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 183: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.4
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:270:12 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 184: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.5
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:270:12 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 185: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.6
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:270:12 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 186: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.7
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:270:25 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 187: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.8
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:270:25 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 188: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.9
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:270:25 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 189: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.10
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:270:25 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 190: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.11
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:270:25 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 191: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.12
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:270:25 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 192: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.13
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:271:21 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 193: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.14
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:271:21 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 194: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.15
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:271:21 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 195: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.16
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:271:21 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 196: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.17
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:271:21 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 197: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.18
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:271:21 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 198: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.19
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:279:46 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 199: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.20
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:279:46 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 200: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.21
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:279:46 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 201: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.22
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:279:46 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 202: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.23
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:279:46 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 203: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.24
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:279:46 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 204: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.25
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:279:59 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 205: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.26
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:279:59 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 206: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.27
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:279:59 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 207: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.28
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:279:59 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 208: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.29
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:279:59 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 209: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.30
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:279:59 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 210: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.31
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:280:21 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 211: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.32
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:280:21 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 212: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.33
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:280:21 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 213: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.34
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:280:21 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 214: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.35
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:280:21 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 215: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.36
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:280:21 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 216: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.37
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:283:13 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 217: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.38
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:283:13 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 218: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.39
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:283:13 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 219: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.40
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:283:13 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 220: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.41
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:283:13 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 221: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.42
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:283:13 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 222: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.43
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:289:13 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 223: <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next.pointer_dereference.44
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/iter/adapters/zip.rs:291:13 in function <std::iter::Zip<A, B> as std::iter::adapters::zip::ZipImpl<A, B>>::next
+
+Check 224: std::f32::<impl f32>::log.division-by-zero.1
+- Status: SUCCESS
+- Description: "division by zero"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/f32.rs:451:9 in function std::f32::<impl f32>::log
+
+Check 225: std::f32::<impl f32>::log.NaN.1
+- Status: SUCCESS
+- Description: "NaN on division"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/f32.rs:451:9 in function std::f32::<impl f32>::log
+
+Check 226: std::f32::<impl f32>::log.overflow.1
+- Status: SUCCESS
+- Description: "arithmetic overflow on floating-point division"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/f32.rs:451:9 in function std::f32::<impl f32>::log
+
+Check 227: core::slice::<impl [T]>::first.pointer_dereference.1
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/slice/mod.rs:172:58 in function core::slice::<impl [T]>::first
+
+Check 228: core::num::dec2flt::slow::parse_long_mantissa::{closure#0}.array_bounds.1
+- Status: SUCCESS
+- Description: "index out of bounds: the length is less than or equal to the given index"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/slow.rs:33:29 in function core::num::dec2flt::slow::parse_long_mantissa::{closure#0}
+
+Check 229: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.1
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:61:32 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 230: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.2
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:61:32 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 231: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.3
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:61:32 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 232: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.4
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:61:32 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 233: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.5
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:61:32 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 234: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.6
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:61:32 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 235: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.7
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:63:41 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 236: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.8
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:63:41 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 237: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.9
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:63:41 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 238: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.10
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:63:41 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 239: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.11
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:63:41 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 240: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.12
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:63:41 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 241: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.13
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:64:20 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 242: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.14
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:64:20 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 243: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.15
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:64:20 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 244: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.16
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:64:20 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 245: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.17
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:64:20 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 246: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.18
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:64:20 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 247: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.19
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:65:50 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 248: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.20
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:65:50 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 249: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.21
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:65:50 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 250: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.22
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:65:50 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 251: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.23
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:65:50 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 252: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.24
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:65:50 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 253: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.25
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:67:48 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 254: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.26
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:67:48 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 255: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.27
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:67:48 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 256: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.28
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:67:48 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 257: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.29
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:67:48 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 258: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.30
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:67:48 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 259: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.31
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:71:29 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 260: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.32
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:71:29 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 261: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.33
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:71:29 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 262: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.34
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:71:29 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 263: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.35
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:71:29 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 264: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.36
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:71:29 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 265: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.37
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:72:32 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 266: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.38
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:72:32 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 267: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.39
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:72:32 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 268: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.40
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:72:32 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 269: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.41
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:72:32 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 270: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.42
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:72:32 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 271: core::num::dec2flt::number::Number::try_fast_path.array_bounds.1
+- Status: SUCCESS
+- Description: "index out of bounds: the length is less than or equal to the given index"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:72:58 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 272: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.43
+- Status: SUCCESS
+- Description: "dereference failure: pointer NULL"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:78:16 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 273: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.44
+- Status: SUCCESS
+- Description: "dereference failure: pointer invalid"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:78:16 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 274: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.45
+- Status: SUCCESS
+- Description: "dereference failure: deallocated dynamic object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:78:16 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 275: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.46
+- Status: SUCCESS
+- Description: "dereference failure: dead object"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:78:16 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 276: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.47
+- Status: SUCCESS
+- Description: "dereference failure: pointer outside object bounds"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:78:16 in function core::num::dec2flt::number::Number::try_fast_path
+
+Check 277: core::num::dec2flt::number::Number::try_fast_path.pointer_dereference.48
+- Status: SUCCESS
+- Description: "dereference failure: invalid integer address"
+- Location: ~/.rustup/toolchains/nightly-2022-06-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/num/dec2flt/number.rs:78:16 in function core::num::dec2flt::number::Number::try_fast_path
+
+
+SUMMARY:
+** 1 of 277 failed (3 unreachable)
+Failed Checks: assertion
+
+VERIFICATION:- FAILED
+
+
+              </xmp>
+            </div><!-- class="output-box" -->
+            
+          
+
+          
+          <div class="output-box"><xmp>stderr:
+            
+warning: Found the following unsupported constructs:
+- 'logf32' intrinsic (1)
+
+Verification will fail if one or more of these constructs is reachable.
+See https://model-checking.github.io/kani/rust-feature-support.html for more details.
+
+warning: 1 warning emitted
+
+            </xmp>
+          </div><!-- class="output-box" -->
+          
+
+        </div><!-- class="command-content" -->
+      </div><!-- class="fail" -->
+    </div><!-- id="command-table" -->
+    
+
+  </div><!-- class="stage" -->
+  
+
+
+</div><!-- id="content" -->
+</body>
+</html>
